@@ -36,7 +36,7 @@ Les véhicules de plus de 300 000 km, vendus plus de 25 lakh ou ayant eu 3 propr
 2. Régression linéaire simple, prix en fonction de l'âge, avec 4 bibliothèques : scipy (`linregress`), numpy (`polyfit`), scikit-learn (`LinearRegression`) et statsmodels (`OLS`).
 3. Régression multivariée (scikit-learn) avec l'âge, les kilomètres et la transmission.
 4. Modèle personnalisé (`CustomLinearRegression`) : descente de gradient, arrêtée quand l'erreur baisse de moins de 0,000001.
-5. Estimation du prix d'un véhicule de 7 ans, 100 000 km, boîte manuelle.
+5. Prix d'un véhicule de moins de 7 ans, moins de 100 000 km, boîte manuelle : prédiction pour 7 ans et 100 000 km (avec tout le jeu de données, puis sans les données isolées), et prix moyen des véhicules du jeu de données qui correspondent.
 
 ## Résultats (validation)
 | Modèle | R² apprentissage | R² validation | RMSE (lakh) |
@@ -45,8 +45,10 @@ Les véhicules de plus de 300 000 km, vendus plus de 25 lakh ou ayant eu 3 propr
 | Personnalisé | 0,070 | 0,002 | 5,61 |
 | Multivarié | 0,283 | 0,280 | 4,77 |
 
-Les quatre modèles simples donnent la même droite (pente -0,370, ordonnée 6,151) ; le modèle personnalisé la retrouve. Le modèle multivarié est le meilleur ; il estime le véhicule de la question 5 à environ 6,87 lakh.
+Les quatre modèles simples donnent la même droite (pente -0,370, ordonnée 6,151) ; le modèle personnalisé la retrouve. Le modèle multivarié est le meilleur.
+
+Question 5 : le modèle multivarié prédit 6,87 lakh pour un véhicule d'exactement 7 ans et 100 000 km (3,98 lakh avec tout le jeu de données). Les 189 véhicules du jeu de données de moins de 7 ans, moins de 100 000 km et boîte manuelle valent en moyenne 4,34 lakh (4,34 prédit) : c'est la meilleure réponse à la question posée.
 
 ## Limites
-* L'âge seul explique très peu le prix (R² proche de 0) : le prix dépend surtout du modèle de voiture, non utilisé ici.
-* La première estimation de la question 5 utilise des coefficients recopiés à la main d'un calcul précédent ; seule la seconde est recalculée.
+* L'âge seul explique très peu le prix (R² proche de 0). Le prix du véhicule neuf (`Present_Price`, corrélation 0,89 avec le prix de vente) n'est pas utilisé : l'ajouter au modèle multivarié porterait le R² de validation à 0,88 (vérifié hors du notebook).
+* Dans le modèle multivarié, le coefficient des kilomètres est positif (+6,6 lakh pour 100 000 km) : les voitures chères roulent plus, et le modèle attribue aux kilomètres un effet qui vient en fait du prix neuf. C'est pourquoi la prédiction à 100 000 km est élevée.
