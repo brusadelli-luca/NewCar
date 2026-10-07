@@ -6,4 +6,3 @@ statsmodels
 matplotlib
 seaborn
 missingno
-jupyter
