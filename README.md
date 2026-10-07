@@ -6,7 +6,7 @@ Code écrit de décembre 2022 à janvier 2023. Revue et corrections faites avec 
 
 ## Prérequis
 * Python 3 (testé avec Python 3.12 et 3.14)
-* pandas, numpy, scipy, scikit-learn, statsmodels, matplotlib, seaborn, missingno et jupyter, listés dans `requirements.txt`
+* pandas, numpy, scipy, scikit-learn, statsmodels, matplotlib, seaborn, missingno, listés dans `requirements.txt`
 
 Depuis le dossier du projet, créer un environnement virtuel et installer les bibliothèques (commandes Windows) :
 
@@ -16,13 +16,17 @@ python -m venv .venv
 ```
 
 ## Lancement
+Ouvrir `main.ipynb` avec VS Code (extension Jupyter, en choisissant le Python du `.venv`), ou avec JupyterLab :
+
 ```
-.venv\Scripts\python -m jupyter notebook main.ipynb
+.venv\Scripts\python -m pip install jupyterlab
+.venv\Scripts\python -m jupyter lab main.ipynb
 ```
-puis exécuter toutes les cellules (menu *Run > Run All Cells*). Les sorties enregistrées dans le notebook sont celles de la dernière exécution.
+
+puis exécuter toutes les cellules (« Run All »). Les sorties (tableaux, graphiques, résultats) sont enregistrées dans le notebook : GitHub les affiche sans rien exécuter. Elles correspondent à une exécution complète avec Python 3.12.
 
 ## Données
-`data/carData.csv` : jeu de données « Vehicle dataset » de CarDekho (301 véhicules). Colonnes utilisées :
+`data/carData.csv` : jeu de données [« Vehicle dataset from cardekho »](https://www.kaggle.com/datasets/nehalbirla/vehicle-dataset-from-cardekho) publié sur Kaggle par nehalbirla, sous licence Database Contents License (DbCL) v1.0 (301 véhicules). Colonnes utilisées :
 * `Year` : année de construction (l'âge est calculé comme `année max + 1 - Year`)
 * `Selling_Price` : prix de vente en lakh (100 000 roupies), la valeur à prédire
 * `Kms_Driven` : kilomètres parcourus
